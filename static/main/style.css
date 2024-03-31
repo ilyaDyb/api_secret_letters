@@ -1,0 +1,6 @@
+.code-block {
+    background-color: #272822; /* Цвет фона */
+    color: #f8f8f2; /* Цвет текста */
+    padding: 10px; /* Отступы вокруг кода */
+    border-radius: 5px; /* Закругленные углы блока */
+}

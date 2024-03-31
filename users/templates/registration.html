@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница регистрации</title>
+    <!-- Подключение стилей Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Регистрация</h2>
+                <form action="{% url "user:registration" %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Имя пользователя</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Введите ваше имя">
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email адрес</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Введите ваш email">
+                        {% if form.email.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" id="password1" name="password1" placeholder="Введите ваш пароль">
+                        {% if form.password1.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Подтвердите пароль</label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Подтвердите ваш пароль">
+                        {% if form.password1.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p>Уже зарегистрированы? <a href="#">Войдите</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

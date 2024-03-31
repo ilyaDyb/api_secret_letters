@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример навигационной панели Bootstrap</title>
+    <!-- Подключение стилей Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPython.min.js"></script>
+    <link rel="stylesheet" href="{% static "main/style.css" %}">
+</head>
+<body>
+    {% csrf_token %}
+    <!-- Навигационная панель Bootstrap -->
+    {% include "includes/nav_bar.html" %}
+
+    <!-- Основной контент -->
+    <div class="container col-9 mt-5" >
+        <h3>Здесь вы можете найти документацию по нашему api</h3>
+        <hr>
+        <h4>
+            api секретных записок. Как же оно работает? Все очень просто, можно создавать свои записки и читать чужие.
+        </h4>
+        <h4>Чтобы создать записку нужно передать в <b>POST</b>-запросе текст записки и пароль.</h4>
+        <div class="code-block"> 
+            <pre class="brush: python">
+                response = requests.post(url="http://127.0.0.1:8000/api/v1/create-letter/",
+                        data={"text":"Тестовый текст, который вы можете сами прочитать и записка не удалится", "password": "1234", "api_key": "YOUR_API_KEY"})
+                print(response.text)
+            </pre>
+        </div>
+        <h4>Вывод</h4>
+        <div class="code-block"> 
+            <pre class="brush: python">
+                [
+                    {
+                        "status": "success",
+                        "password": "1234",
+                        "text": "Тестовый текст, который вы можете сами прочитать и записка не удалится",
+                        "id": "697fae81-569f-42fc-8ea8-87d77a5875c4"
+                    }
+                ]
+            </pre>
+        </div>
+        <h4>Так вот, чтобы ваш друго или еще кто-то прочитал ее, следует передать ему id записки и пароль.</h4>
+        <hr>
+        <h3>Как прочитать записку?</h3>
+        <h4>Чтобы прочитать записку нужно передать в <b>POST</b>-запросе передать id и пароль записки</h4>
+        <div class="code-block"> 
+            <pre class="brush: python">
+                response = requests.post(url="http://127.0.0.1:8000/api/v1/read-letter/",
+                    data={"id":"697fae81-569f-42fc-8ea8-87d77a5875c4", "password": "1234"})
+                print(response.text)
+            </pre>
+        </div>
+        <h4>Вывод</h4>
+        <div class="code-block"> 
+            <pre class="brush: python">
+                [
+                    {
+                        "status": "success",
+                        "text": "Тестовый текст, который вы можете сами прочитать и записка не удалится"
+                    }
+                ]
+            </pre>
+        </div>
+        <h4>Вы можете сами протестить API использую id и пароль этой записки, она не удалится. Все остальные записки после прочтения удаляются!</h4>
+    </div>
+
+    <!-- Подключение скриптов Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>SyntaxHighlighter.all()</script>
+</body>
+</html>

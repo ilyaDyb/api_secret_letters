@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API ключ</title>
+    <!-- Подключение стилей Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    {% include "includes/nav_bar.html" %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Ваш API ключ</h2>
+                <div class="alert alert-info" role="alert">
+                    Ваш API ключ позволяет вам доступ к API нашего сервиса.
+                </div>
+                <div class="form-group">
+                    <label for="apiKey">API ключ</label>
+                    {% if request.user.is_authenticated %}
+                        <input type="text" class="form-control" id="apiKey" value="{{ api_key }}" readonly>
+                    {% else %}
+                        <p>Чтобы получить API ключ, требуется авторизоваться</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
